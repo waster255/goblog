@@ -10,6 +10,7 @@ func main() {
 	router := gin.Default()
 
 	router.POST("/user", lib.AddUser)
+	router.GET("/users", lib.GetUser)
 	
 	router.Run(":8080")
 }

@@ -29,3 +29,15 @@ func AddUser(c *gin.Context) {
 	session.AutoMigrate(&User{})
 	session.Create(&User{Username: user.Username, Password: user.Password})
 }
+
+func GetUser(c *gin.Context) {
+	session, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
+	if err != nil {
+		c.JSON(302, err)
+	}
+
+	var users []User
+	session.Find(&users)
+	
+	c.JSON(200, gin.H{"users": users})
+}
